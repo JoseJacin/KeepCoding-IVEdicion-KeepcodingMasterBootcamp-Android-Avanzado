@@ -1,4 +1,4 @@
-package com.josejacin.domain;
+package com.josejacin.madridshops.domain;
 
 import com.josejacin.madridshops.domain.model.Shop;
 import com.josejacin.madridshops.domain.model.Shops;

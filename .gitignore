@@ -126,7 +126,4 @@ google-services.json
 # End of https://www.gitignore.io/api/androidstudio
 .idea/copyright/
 app/libs/
-app/src/main/res/drawable/
 domain/libs/
-domain/src/main/java/
-domain/src/main/res/drawable/
