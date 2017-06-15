@@ -3,6 +3,8 @@ package com.josejacin.madridshops;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
+import com.squareup.picasso.Picasso;
+
 public class MadridShopsApp extends MultiDexApplication {
 
     public static final String APP_NAME = MadridShopsApp.class.getCanonicalName();
@@ -13,6 +15,11 @@ public class MadridShopsApp extends MultiDexApplication {
         super.onCreate();
 
         Log.d(APP_NAME, "App starting");
+
+        // Activa los log de Picasso
+        Picasso.with(getApplicationContext()).setLoggingEnabled(true);
+        // Activa los indicadores de Picasso
+        Picasso.with(getApplicationContext()).setIndicatorsEnabled(true);
 
     }
 
