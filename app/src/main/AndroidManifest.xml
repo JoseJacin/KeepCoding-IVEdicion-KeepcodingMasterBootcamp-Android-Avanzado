@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.josejacin.madridshops">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".MadridShopsApp"
@@ -22,6 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.ShopListActivity">
+        </activity>
+        <activity android:name=".activities.ShopDetailActivity">
         </activity>
     </application>
 

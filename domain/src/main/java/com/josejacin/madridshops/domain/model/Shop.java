@@ -2,7 +2,10 @@ package com.josejacin.madridshops.domain.model;
 
 import android.support.annotation.NonNull;
 
-public class Shop {
+import java.io.Serializable;
+
+// Representa una Shop en memoria
+public class Shop implements Serializable {
     private long id;
     private String name;
     private String imageUrl;

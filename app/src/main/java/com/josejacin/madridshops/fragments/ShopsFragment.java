@@ -18,6 +18,8 @@ import com.josejacin.madridshops.views.OnElementClick;
 
 public class ShopsFragment extends Fragment {
 
+    private OnElementClick<Shop> listener;
+
     private RecyclerView shopsRecyclerView;
     private ShopsAdapter adapter;
     private Shops shops;
@@ -48,8 +50,20 @@ public class ShopsFragment extends Fragment {
             @Override
             public void clickOn(@NonNull Shop shop, int position) {
                 Log.d("Click", shop.getName());
+                // Se accede al listener
+                if (listener != null) {
+                    // Llama al listener
+                    listener.clickOn(shop, position);
+                    // Otra forma de hacerlo
+                    //ShopsFragment.this.listener.clickOn(shop, position);
+                }
+
             }
         });
+    }
+
+    public void setOnElementClickListener(OnElementClick<Shop> listener) {
+        this.listener = listener;
     }
 
 }
