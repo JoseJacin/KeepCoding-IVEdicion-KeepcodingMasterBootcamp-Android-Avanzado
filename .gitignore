@@ -127,3 +127,4 @@ google-services.json
 .idea/copyright/
 app/libs/
 domain/libs/
+src/tablet/
