@@ -45,7 +45,7 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopRowViewHolder> {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.clickOn(shop, position);
+                    listener.clickedOn(shop, position);
                 }
             }
         });

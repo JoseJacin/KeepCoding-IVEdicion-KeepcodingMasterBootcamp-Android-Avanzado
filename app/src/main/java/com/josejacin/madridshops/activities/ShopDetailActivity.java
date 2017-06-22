@@ -20,7 +20,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     @BindView((R.id.activity_shop_detail__shop_address)) TextView address;
     @BindView(R.id.activity_shop_detail__shop_description) TextView description;
     @BindView(R.id.activity_shop_detail__shop_image) ImageView shopImage;
-    @BindView(R.id.activity_shop_detail__shop_map) ImageView shopMap;
+    @BindView(R.id.activity_shop_detail__shop_map) ImageView mapImage;
     @BindView(R.id.activity_shop_detail__shop_name) TextView name;
 
     @Override
@@ -32,7 +32,7 @@ public class ShopDetailActivity extends AppCompatActivity {
         // Se obtiene el Shops que nos viene de la ActivityShopList
         Intent intent = getIntent();
         if (intent != null) {
-            Shop shop = (Shop) intent.getSerializableExtra(Constants.INTENT_SHOPS_DETAIL);
+            Shop shop = (Shop) intent.getSerializableExtra(Constants.INTENT_SHOP_DETAIL);
             name.setText(shop.getName());
             address.setText(shop.getAddress());
             description.setText(shop.getDescription());
@@ -40,11 +40,12 @@ public class ShopDetailActivity extends AppCompatActivity {
                     load(shop.getImageUrl()).
                     placeholder(R.drawable.shop_placeholder).
                     into(shopImage);
+
             String staticMapUrl = StaticMapImage.getMapImageUrl(shop);
             Picasso.with(this).
                     load(staticMapUrl).
                     placeholder(R.drawable.map_placeholder).
-                    into(shopMap);
+                    into(mapImage);
         }
     }
 }

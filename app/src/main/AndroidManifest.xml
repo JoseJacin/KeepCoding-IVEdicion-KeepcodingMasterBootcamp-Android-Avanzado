@@ -21,10 +21,29 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ShopListActivity">
+
+        <activity android:name=".activities.ShopListActivity" android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.ShopDetailActivity">
+
+        <activity android:name=".activities.ShopDetailActivity" android:parentActivityName=".activities.ShopListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.ShopListActivity" />
         </activity>
+
+        <!-- Google Maps -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+        android:value="AIzaSyC3RdIta8mCeEDBFYZ4dfqMwLh2S9hYOJo" />
+
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>

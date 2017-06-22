@@ -48,14 +48,14 @@ public class ShopsFragment extends Fragment {
 
         adapter.setOnClickListener(new OnElementClick<Shop>() {
             @Override
-            public void clickOn(@NonNull Shop shop, int position) {
+            public void clickedOn(@NonNull Shop shop, int position) {
                 Log.d("Click", shop.getName());
                 // Se accede al listener
                 if (listener != null) {
                     // Llama al listener
-                    listener.clickOn(shop, position);
+                    listener.clickedOn(shop, position);
                     // Otra forma de hacerlo
-                    //ShopsFragment.this.listener.clickOn(shop, position);
+                    //ShopsFragment.this.listener.clickedOn(shop, position);
                 }
 
             }
