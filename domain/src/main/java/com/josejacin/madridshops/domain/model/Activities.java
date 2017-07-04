@@ -1,13 +1,42 @@
 package com.josejacin.madridshops.domain.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Activities implements ActivitiesIterable, ActivitiesUpdatable {
     // Properties
+    private List<Activity> activities;
+
+    public Activities() {
+    }
+
+    // Lazy getter.
+    // Se reserva memoria solo cuando se va a necesitar el objeto
+    private List<Activity> getActivities() {
+        if (activities == null) {
+            activities = new LinkedList<>();
+        }
+        return activities;
+    }
+
+    @Override
+    public void add(Activity activity) {
+        getActivities().add(activity);
+    }
+
+    @Override
+    public void delete(Activity activity) {
+
+    }
+
+    @Override
+    public void update(Activity newActivity, long index) {
+
+    }
 
     @Override
     public long size() {
-        return 0;
+        return getActivities().size();
     }
 
     @Override
@@ -20,18 +49,5 @@ public class Activities implements ActivitiesIterable, ActivitiesUpdatable {
         return null;
     }
 
-    @Override
-    public void add(Activity activity) {
 
-    }
-
-    @Override
-    public void delete(Activity activity) {
-
-    }
-
-    @Override
-    public void update(Activity newActivity, long index) {
-
-    }
 }

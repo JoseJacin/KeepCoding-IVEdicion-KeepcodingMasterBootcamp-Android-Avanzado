@@ -1,5 +1,7 @@
 package com.josejacin.madridshops.domain.model;
 
+import android.support.annotation.NonNull;
+
 public class Activity {
     private long id;
     private String name;
@@ -37,7 +39,7 @@ public class Activity {
         return name;
     }
 
-    public Activity setName(String name) {
+    public Activity setName(@NonNull String name) {
         this.name = name;
         return this;
     }
