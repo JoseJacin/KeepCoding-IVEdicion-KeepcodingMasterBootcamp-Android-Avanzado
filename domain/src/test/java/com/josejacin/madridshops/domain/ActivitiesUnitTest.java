@@ -36,4 +36,16 @@ public class ActivitiesUnitTest {
 
         assertEquals(0, sut.size());
     }
+
+    @Test
+    public void activities_adding_one_activity_and_getting_returns_that_activity() throws Exception {
+        Activities sut = new Activities();
+
+        Activity activity = Activity.of(1, "My activity");
+        sut.add(activity);
+        Activity activity1 = sut.get(0);
+
+        assertEquals(activity.getId(), activity1.getId());
+        assertEquals(activity.getName(), activity1.getName());
+    }
 }

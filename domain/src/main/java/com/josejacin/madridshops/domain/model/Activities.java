@@ -41,7 +41,7 @@ public class Activities implements ActivitiesIterable, ActivitiesUpdatable {
 
     @Override
     public Activity get(long index) {
-        return null;
+        return getActivities().get((int) index);
     }
 
     @Override
