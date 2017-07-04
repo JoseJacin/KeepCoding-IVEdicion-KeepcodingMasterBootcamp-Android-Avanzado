@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(MainActivity.class.getCanonicalName(), "Hello activities");
+
+                Navigator.navigateFromMainActivityToActivityListActivity(MainActivity.this);
             }
         });
 
