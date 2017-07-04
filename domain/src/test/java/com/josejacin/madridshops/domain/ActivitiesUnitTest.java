@@ -8,6 +8,7 @@ import com.josejacin.madridshops.domain.model.Shops;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class ActivitiesUnitTest {
     @Test
@@ -62,5 +63,21 @@ public class ActivitiesUnitTest {
         assertEquals(10, sut.allActivities().size());
         assertEquals(0, sut.allActivities().get(0).getId());
         assertEquals("My activity 0", sut.allActivities().get(0).getName());
+    }
+
+    @Test
+    public void activities_updating_one_activity_and_getting_returns_that_modify_activity() throws Exception {
+        Activities sut = new Activities();
+
+        for (int i = 0; i < 10; i++) {
+            Activity activity = Activity.of(i, "My activity " + i);
+            sut.add(activity);
+        }
+
+        sut.update(Activity.of(5, "My updated activity"),5);
+
+        assertNotEquals("My updated activity", sut.get(4).getName());
+        assertEquals("My updated activity", sut.get(5).getName());
+        assertNotEquals("My updated activity", sut.get(6).getName());
     }
 }

@@ -31,7 +31,7 @@ public class Activities implements ActivitiesIterable, ActivitiesUpdatable {
 
     @Override
     public void update(Activity newActivity, long index) {
-
+        getActivities().set((int)index, newActivity);
     }
 
     @Override
