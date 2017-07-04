@@ -16,7 +16,7 @@ public class DBShopConstants {
     public static final String KEY_SHOP_LATITUDE = "latitude";
     public static final String KEY_SHOP_LONGITUDE = "longitude";
 
-    public static final String[] ALL_COLUMNS = {
+    public static final String[] ALL_SHOP_COLUMNS = {
             KEY_SHOP_ID,
             KEY_SHOP_NAME,
             KEY_SHOP_IMAGE_URL,
@@ -41,11 +41,4 @@ public class DBShopConstants {
                     + KEY_SHOP_LONGITUDE + " real, "
                     + KEY_SHOP_DESCRIPTION + " text "
                     + ");";
-
-    public static final String DROP_DATABASE_SCRIPTS = "";
-    public static final String UPDATE_DATABASE_SCRIPTS = "";
-
-    public static final String[] CREATE_DATABASE_SCRIPTS = {
-            SQL_SCRIPT_CREATE_SHOP_TABLE
-    };
 }

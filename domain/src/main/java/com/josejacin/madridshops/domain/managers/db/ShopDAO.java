@@ -59,7 +59,7 @@ public class ShopDAO implements DAOReadable<Shop>, DAOWritable<Shop> {
     @Override
     public @Nullable List<Shop> query(String where, String[] whereArgs, String orderBy) {
         Cursor c = dbReadConnection.query(TABLE_SHOP, // Table name
-                ALL_COLUMNS,    // Columns I want to obtain
+                ALL_SHOP_COLUMNS,    // Columns I want to obtain
                 where,             // Where
                 whereArgs,           // Where arguments
                 orderBy,    // Order by

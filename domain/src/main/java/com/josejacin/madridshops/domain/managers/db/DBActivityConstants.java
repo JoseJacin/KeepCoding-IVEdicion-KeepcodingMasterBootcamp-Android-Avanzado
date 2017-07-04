@@ -16,7 +16,7 @@ public class DBActivityConstants {
     public static final String KEY_ACTIVITY_LATITUDE = "latitude";
     public static final String KEY_ACTIVITY_LONGITUDE = "longitude";
 
-    public static final String[] ALL_COLUMNS = {
+    public static final String[] ALL_ACTIVITY_COLUMNS = {
             KEY_ACTIVITY_ID,
             KEY_ACTIVITY_NAME,
             KEY_ACTIVITY_IMAGE_URL,
@@ -41,11 +41,4 @@ public class DBActivityConstants {
                     + KEY_ACTIVITY_LONGITUDE + " real, "
                     + KEY_ACTIVITY_DESCRIPTION + " text "
                     + ");";
-
-    public static final String DROP_DATABASE_SCRIPTS = "";
-    public static final String UPDATE_DATABASE_SCRIPTS = "";
-
-    public static final String[] CREATE_DATABASE_SCRIPTS = {
-            SQL_SCRIPT_CREATE_ACTIVITY_TABLE
-    };
 }
