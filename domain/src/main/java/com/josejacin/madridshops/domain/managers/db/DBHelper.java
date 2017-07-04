@@ -46,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Utilities methods
+    // Utility methods
     public static int convertBooleanToInt(boolean b) {
         // Retorna 1 si b es true
         // Retorna 0 si b es false
