@@ -32,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        for (String script : DBConstants.CREATE_DATABASE_SCRIPTS) {
+        for (String script : DBShopConstants.CREATE_DATABASE_SCRIPTS) {
             sqLiteDatabase.execSQL(script);
         }
     }
@@ -40,7 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         if (oldVersion == 1 && newVersion ==2) { // v1 --> v2
-            sqLiteDatabase.execSQL(DBConstants.UPDATE_DATABASE_SCRIPTS);
+            sqLiteDatabase.execSQL(DBShopConstants.UPDATE_DATABASE_SCRIPTS);
         } else if (oldVersion == 1 && newVersion == 3) { // v1 --> v3
 
         }

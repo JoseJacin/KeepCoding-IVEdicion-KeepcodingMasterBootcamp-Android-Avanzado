@@ -12,7 +12,7 @@ import com.josejacin.madridshops.domain.model.Shop;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.josejacin.madridshops.domain.managers.db.DBConstants.*;
+import static com.josejacin.madridshops.domain.managers.db.DBShopConstants.*;
 
 public class ShopDAO implements DAOReadable<Shop>, DAOWritable<Shop> {
 

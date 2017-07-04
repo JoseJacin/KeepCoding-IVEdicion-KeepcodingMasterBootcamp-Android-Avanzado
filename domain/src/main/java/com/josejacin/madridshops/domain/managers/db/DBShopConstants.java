@@ -1,6 +1,6 @@
 package com.josejacin.madridshops.domain.managers.db;
 
-public class DBConstants {
+public class DBShopConstants {
     public static final String TABLE_SHOP = "SHOP";
 
     // Table field constants
