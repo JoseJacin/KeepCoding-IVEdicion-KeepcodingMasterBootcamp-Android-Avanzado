@@ -46,7 +46,15 @@ public class Activities implements ActivitiesIterable, ActivitiesUpdatable {
 
     @Override
     public List<Activity> allActivities() {
-        return null;
+        // Se realiza una copia inmutable de la lista de activities para evitar que desde fuera se pueda
+        // modificar sin parar por los métodos de modificación (add, delete, update, ...)
+        List<Activity> listCopy = new LinkedList<>();
+
+        for (Activity activity : getActivities()) {
+            listCopy.add(activity);
+        }
+
+        return listCopy;
     }
 
 

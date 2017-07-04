@@ -48,4 +48,19 @@ public class ActivitiesUnitTest {
         assertEquals(activity.getId(), activity1.getId());
         assertEquals(activity.getName(), activity1.getName());
     }
+
+    @Test
+    public void activities_adding_several_activities_returns_all_activities() throws Exception {
+        Activities sut = new Activities();
+
+        for (int i = 0; i < 10; i++) {
+            Activity activity = Activity.of(i, "My activity " + i);
+            sut.add(activity);
+        }
+
+        assertEquals(10, sut.size());
+        assertEquals(10, sut.allActivities().size());
+        assertEquals(0, sut.allActivities().get(0).getId());
+        assertEquals("My activity 0", sut.allActivities().get(0).getName());
+    }
 }
