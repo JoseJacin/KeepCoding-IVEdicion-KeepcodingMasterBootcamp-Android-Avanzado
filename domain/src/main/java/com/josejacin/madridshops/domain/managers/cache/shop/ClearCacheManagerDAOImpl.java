@@ -1,7 +1,8 @@
-package com.josejacin.madridshops.domain.managers.cache;
+package com.josejacin.madridshops.domain.managers.cache.shop;
 
 import android.content.Context;
 
+import com.josejacin.madridshops.domain.managers.cache.ClearCacheManager;
 import com.josejacin.madridshops.domain.managers.db.ShopDAO;
 
 import java.lang.ref.WeakReference;

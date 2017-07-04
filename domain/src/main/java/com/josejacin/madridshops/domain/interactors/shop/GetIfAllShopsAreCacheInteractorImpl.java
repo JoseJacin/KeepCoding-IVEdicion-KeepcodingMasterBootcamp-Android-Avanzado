@@ -1,4 +1,4 @@
-package com.josejacin.madridshops.domain.interactors;
+package com.josejacin.madridshops.domain.interactors.shop;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.josejacin.madridshops.domain.interactors;
+package com.josejacin.madridshops.domain.interactors.shop;
 
 import com.josejacin.madridshops.domain.model.Shops;
 

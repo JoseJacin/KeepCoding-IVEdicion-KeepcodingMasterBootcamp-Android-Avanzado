@@ -1,25 +1,22 @@
 package com.josejacin.madridshops.activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.josejacin.madridshops.MadridShopsApp;
 import com.josejacin.madridshops.R;
 import com.josejacin.madridshops.domain.interactors.ClearCacheInteractor;
 import com.josejacin.madridshops.domain.interactors.ClearCacheInteractorImpl;
-import com.josejacin.madridshops.domain.interactors.SetAllShopsAreCacheInteractor;
-import com.josejacin.madridshops.domain.interactors.SetAllShopsAreCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.SetAllShopsAreCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.SetAllShopsAreCacheInteractorImpl;
 import com.josejacin.madridshops.domain.managers.cache.ClearCacheManager;
-import com.josejacin.madridshops.domain.managers.cache.ClearCacheManagerDAOImpl;
+import com.josejacin.madridshops.domain.managers.cache.shop.ClearCacheManagerDAOImpl;
 import com.josejacin.madridshops.navigator.Navigator;
 import com.josejacin.madridshops.util.MainThread;
 
 import java.io.BufferedReader;
-import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

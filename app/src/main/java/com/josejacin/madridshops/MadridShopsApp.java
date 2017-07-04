@@ -1,28 +1,15 @@
 package com.josejacin.madridshops;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.SystemClock;
-import android.support.annotation.NonNull;
 import android.support.multidex.MultiDexApplication;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
 import com.josejacin.madridshops.activities.ShopListActivity;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsInteractor;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsInteractorCompletion;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsInteractorImpl;
-import com.josejacin.madridshops.domain.interactors.InteractorErrorCompletion;
-import com.josejacin.madridshops.domain.managers.network.GetAllShopsManagerCompletion;
-import com.josejacin.madridshops.domain.managers.network.GetAllShopsManagerImpl;
-import com.josejacin.madridshops.domain.managers.network.ManagerErrorCompletion;
-import com.josejacin.madridshops.domain.managers.network.NetworkManager;
-import com.josejacin.madridshops.domain.model.Shops;
 import com.josejacin.madridshops.services.ShopService;
 import com.squareup.picasso.Picasso;
 

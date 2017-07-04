@@ -1,6 +1,6 @@
-package com.josejacin.madridshops.domain.interactors;
+package com.josejacin.madridshops.domain.interactors.shop;
 
-import com.josejacin.madridshops.domain.managers.cache.SaveAllShopsIntoCacheManager;
+import com.josejacin.madridshops.domain.managers.cache.shop.SaveAllShopsIntoCacheManager;
 import com.josejacin.madridshops.domain.model.Shops;
 
 public class SaveAllShopsIntoCacheInteractorImpl  implements SaveAllShopsIntoCacheInteractor {

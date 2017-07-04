@@ -1,9 +1,8 @@
-package com.josejacin.madridshops.domain.managers.cache;
+package com.josejacin.madridshops.domain.managers.cache.shop;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 
 import com.josejacin.madridshops.domain.managers.db.ShopDAO;

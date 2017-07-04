@@ -1,4 +1,4 @@
-package com.josejacin.madridshops.domain.interactors;
+package com.josejacin.madridshops.domain.interactors.shop;
 
 public interface GetIfAllShopsAreCacheInteractor {
     void execute(Runnable onAllShopsAreCached, Runnable onAllShopsAeNotCached);

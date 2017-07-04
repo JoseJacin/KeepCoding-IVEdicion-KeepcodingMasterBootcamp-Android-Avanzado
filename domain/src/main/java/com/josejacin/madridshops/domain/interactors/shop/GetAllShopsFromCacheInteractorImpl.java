@@ -1,9 +1,9 @@
-package com.josejacin.madridshops.domain.interactors;
+package com.josejacin.madridshops.domain.interactors.shop;
 
 import android.support.annotation.NonNull;
 
-import com.josejacin.madridshops.domain.managers.cache.GetAllShopsFromCacheManager;
-import com.josejacin.madridshops.domain.managers.cache.GetAllShopsFromCacheManagerCompletion;
+import com.josejacin.madridshops.domain.managers.cache.shop.GetAllShopsFromCacheManager;
+import com.josejacin.madridshops.domain.managers.cache.shop.GetAllShopsFromCacheManagerCompletion;
 import com.josejacin.madridshops.domain.model.Shops;
 
 public class GetAllShopsFromCacheInteractorImpl implements GetAllShopsFromCacheInteractor {

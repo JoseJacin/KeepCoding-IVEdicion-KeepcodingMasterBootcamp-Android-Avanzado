@@ -1,10 +1,7 @@
 package com.josejacin.madridshops.activities;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -20,22 +17,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.josejacin.madridshops.R;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsFromCacheInteractor;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsFromCacheInteractorImpl;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsInteractor;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsInteractorCompletion;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsInteractorImpl;
-import com.josejacin.madridshops.domain.interactors.GetIfAllShopsAreCacheInteractor;
-import com.josejacin.madridshops.domain.interactors.GetIfAllShopsAreCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsFromCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsFromCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsInteractorCompletion;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.GetIfAllShopsAreCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.GetIfAllShopsAreCacheInteractorImpl;
 import com.josejacin.madridshops.domain.interactors.InteractorErrorCompletion;
-import com.josejacin.madridshops.domain.interactors.SaveAllShopsIntoCacheInteractor;
-import com.josejacin.madridshops.domain.interactors.SaveAllShopsIntoCacheInteractorImpl;
-import com.josejacin.madridshops.domain.interactors.SetAllShopsAreCacheInteractor;
-import com.josejacin.madridshops.domain.interactors.SetAllShopsAreCacheInteractorImpl;
-import com.josejacin.madridshops.domain.managers.cache.GetAllShopsFromCacheManager;
-import com.josejacin.madridshops.domain.managers.cache.GetAllShopsFromCacheManagerDAOImpl;
-import com.josejacin.madridshops.domain.managers.cache.SaveAllShopsIntoCacheManager;
-import com.josejacin.madridshops.domain.managers.cache.SaveAllShopsIntoCacheManagerDAOImpl;
+import com.josejacin.madridshops.domain.interactors.shop.SaveAllShopsIntoCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.SaveAllShopsIntoCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.SetAllShopsAreCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.SetAllShopsAreCacheInteractorImpl;
+import com.josejacin.madridshops.domain.managers.cache.shop.GetAllShopsFromCacheManager;
+import com.josejacin.madridshops.domain.managers.cache.shop.GetAllShopsFromCacheManagerDAOImpl;
+import com.josejacin.madridshops.domain.managers.cache.shop.SaveAllShopsIntoCacheManager;
+import com.josejacin.madridshops.domain.managers.cache.shop.SaveAllShopsIntoCacheManagerDAOImpl;
 import com.josejacin.madridshops.domain.managers.network.GetAllShopsManagerImpl;
 import com.josejacin.madridshops.domain.managers.network.NetworkManager;
 import com.josejacin.madridshops.domain.model.Shop;
@@ -46,7 +43,6 @@ import com.josejacin.madridshops.util.map.MapPinnable;
 import com.josejacin.madridshops.util.map.MapUtil;
 import com.josejacin.madridshops.util.map.model.ShopPin;
 import com.josejacin.madridshops.views.OnElementClick;
-
 
 import java.util.List;
 

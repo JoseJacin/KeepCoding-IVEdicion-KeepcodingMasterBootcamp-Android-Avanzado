@@ -1,4 +1,4 @@
-package com.josejacin.madridshops.domain.managers.cache;
+package com.josejacin.madridshops.domain.managers.cache.shop;
 
 import com.josejacin.madridshops.domain.model.Shops;
 

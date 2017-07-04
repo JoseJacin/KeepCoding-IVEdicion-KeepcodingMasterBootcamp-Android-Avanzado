@@ -1,9 +1,10 @@
-package com.josejacin.madridshops.domain.interactors;
+package com.josejacin.madridshops.domain.interactors.shop;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.josejacin.madridshops.domain.interactors.InteractorErrorCompletion;
 import com.josejacin.madridshops.domain.managers.network.GetAllShopsManagerCompletion;
 import com.josejacin.madridshops.domain.managers.network.ManagerErrorCompletion;
 import com.josejacin.madridshops.domain.managers.network.NetworkManager;
