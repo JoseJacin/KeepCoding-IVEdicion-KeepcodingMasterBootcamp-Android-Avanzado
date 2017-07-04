@@ -26,7 +26,7 @@ public class Activities implements ActivitiesIterable, ActivitiesUpdatable {
 
     @Override
     public void delete(Activity activity) {
-
+        getActivities().remove(activity);
     }
 
     @Override
