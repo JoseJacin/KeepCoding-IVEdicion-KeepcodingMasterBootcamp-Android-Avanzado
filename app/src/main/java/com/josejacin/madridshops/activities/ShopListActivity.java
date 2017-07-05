@@ -34,7 +34,7 @@ import com.josejacin.madridshops.domain.managers.cache.shop.GetAllShopsFromCache
 import com.josejacin.madridshops.domain.managers.cache.shop.SaveAllShopsIntoCacheManager;
 import com.josejacin.madridshops.domain.managers.cache.shop.SaveAllShopsIntoCacheManagerDAOImpl;
 import com.josejacin.madridshops.domain.managers.network.GetAllShopsManagerImpl;
-import com.josejacin.madridshops.domain.managers.network.NetworkManager;
+import com.josejacin.madridshops.domain.managers.network.ShopsNetworkManager;
 import com.josejacin.madridshops.domain.model.Shop;
 import com.josejacin.madridshops.domain.model.Shops;
 import com.josejacin.madridshops.fragments.ShopsFragment;
@@ -167,7 +167,7 @@ public class ShopListActivity extends AppCompatActivity {
         // Se establece el spinner (ProgressBar)
         progressBar.setVisibility(View.VISIBLE);
 
-        NetworkManager manager = new GetAllShopsManagerImpl(this);
+        ShopsNetworkManager manager = new GetAllShopsManagerImpl(this);
         GetAllShopsInteractor getAllShopsInteractor = new GetAllShopsInteractorImpl(manager);
         getAllShopsInteractor.execute(
             new GetAllShopsInteractorCompletion() {

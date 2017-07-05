@@ -30,11 +30,11 @@ public class MadridShopsApp extends MultiDexApplication {
         // Activa los indicadores de Picasso
         Picasso.with(getApplicationContext()).setIndicatorsEnabled(true);
 
-        Intent i = new Intent(getApplicationContext(), ShopService.class);
+        //Intent i = new Intent(getApplicationContext(), ShopService.class);
 
-        PendingIntent pendingIntent = PendingIntent.getService(getBaseContext(), 0, i, 0);
+        //PendingIntent pendingIntent = PendingIntent.getService(getBaseContext(), 0, i, 0);
 
-        ShopService.startRunningService(this);
+        //ShopService.startRunningService(this);
 
         /*
         //getService(context, idOfWhatImDoing, intent, flag)
@@ -50,6 +50,7 @@ public class MadridShopsApp extends MultiDexApplication {
         startService(i);
         */
 
+        /*
         Resources resources = getResources();
         Intent intent = new Intent(this, ShopListActivity.class);
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
@@ -66,7 +67,7 @@ public class MadridShopsApp extends MultiDexApplication {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         int notificationId = 0;
         notificationManager.notify(notificationId, notification);
-
+        */
     }
 
     // Método que se dispara cuando hay poca memoria

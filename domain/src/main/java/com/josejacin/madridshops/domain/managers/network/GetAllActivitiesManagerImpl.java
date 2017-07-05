@@ -1,7 +1,8 @@
 package com.josejacin.madridshops.domain.managers.network;
 
 import android.content.Context;
-import android.support.annotation.*;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.android.volley.RequestQueue;
@@ -10,24 +11,24 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.josejacin.domain.R;
-import com.josejacin.madridshops.domain.managers.network.entities.ShopEntity;
-import com.josejacin.madridshops.domain.managers.network.jsonparser.ShopsJsonParser;
+import com.josejacin.madridshops.domain.managers.network.entities.ActivityEntity;
+import com.josejacin.madridshops.domain.managers.network.jsonparser.ActivitiesJsonParser;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class GetAllShopsManagerImpl implements ShopsNetworkManager {
+public class GetAllActivitiesManagerImpl implements ActivitiesNetworkManager {
 
     WeakReference<Context> weakContext;
 
-    public GetAllShopsManagerImpl(Context context) {
+    public GetAllActivitiesManagerImpl(Context context) {
         weakContext = new WeakReference<Context>(context);
     }
 
     // Método que descarga información de red
     @Override
-    public void getShopsFromServer(@NonNull final GetAllShopsManagerCompletion completion, @Nullable final ManagerErrorCompletion errorCompletion) {
-        String url = weakContext.get().getString(R.string.shops_url);
+    public void getActivitiesFromServer(@NonNull final GetAllActivitiesManagerCompletion completion, @Nullable final ManagerErrorCompletion errorCompletion) {
+        String url = weakContext.get().getString(R.string.activities_url);
 
         // Se inicializa Volley
         // Se crea una cola de peticiones
@@ -45,8 +46,8 @@ public class GetAllShopsManagerImpl implements ShopsNetworkManager {
                         Log.d("JSON", response);
 
                         // Se crea un objeto de tipo ShopsJsonParser
-                        ShopsJsonParser parser = new ShopsJsonParser();
-                        List<ShopEntity> entities = parser.parse(response);
+                        ActivitiesJsonParser parser = new ActivitiesJsonParser();
+                        List<ActivityEntity> entities = parser.parse(response);
 
                         // Se retorna la información en el bloque de completion
                         if (completion != null) {

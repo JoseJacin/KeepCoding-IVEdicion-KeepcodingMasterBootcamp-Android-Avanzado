@@ -7,7 +7,7 @@ import android.util.Log;
 import com.josejacin.madridshops.domain.interactors.InteractorErrorCompletion;
 import com.josejacin.madridshops.domain.managers.network.GetAllShopsManagerCompletion;
 import com.josejacin.madridshops.domain.managers.network.ManagerErrorCompletion;
-import com.josejacin.madridshops.domain.managers.network.NetworkManager;
+import com.josejacin.madridshops.domain.managers.network.ShopsNetworkManager;
 import com.josejacin.madridshops.domain.managers.network.entities.ShopEntity;
 import com.josejacin.madridshops.domain.managers.network.mappers.ShopEntityIntoShopsMapper;
 import com.josejacin.madridshops.domain.model.Shops;
@@ -15,15 +15,15 @@ import com.josejacin.madridshops.domain.model.Shops;
 import java.util.List;
 
 public class GetAllShopsInteractorImpl implements GetAllShopsInteractor {
-    private NetworkManager networkManager;
+    private ShopsNetworkManager shopsNetworkManager;
 
-    public GetAllShopsInteractorImpl(@NonNull final NetworkManager networkManager) {
-        this.networkManager = networkManager;
+    public GetAllShopsInteractorImpl(@NonNull final ShopsNetworkManager shopsNetworkManager) {
+        this.shopsNetworkManager = shopsNetworkManager;
     }
 
     @Override
     public void execute(@NonNull final GetAllShopsInteractorCompletion completion, @Nullable final InteractorErrorCompletion onError) {
-        if (this.networkManager == null) {
+        if (this.shopsNetworkManager == null) {
             if (onError == null) {
                 throw new IllegalStateException("Network manager can't be null");
             } else {
@@ -31,7 +31,7 @@ public class GetAllShopsInteractorImpl implements GetAllShopsInteractor {
             }
         }
 
-        this.networkManager.getShopsFromServer(
+        this.shopsNetworkManager.getShopsFromServer(
                 new GetAllShopsManagerCompletion() {
                     @Override
                     public void completion(@NonNull List<ShopEntity> shopEntities) {

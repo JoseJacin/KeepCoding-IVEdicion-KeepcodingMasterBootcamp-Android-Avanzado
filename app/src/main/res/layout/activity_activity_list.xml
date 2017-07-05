@@ -7,4 +7,21 @@
     android:layout_height="match_parent"
     tools:context="com.josejacin.madridshops.activities.ActivityListActivity">
 
+    <fragment
+        android:id="@+id/activity_activity_list__fragment_activities"
+        android:name="com.josejacin.madridshops.fragments.ActivitiesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_activities"/>
+
+    <!--
+    <fragment
+        android:id="@+id/activity_activity_list__fragment_activities"
+        android:name="com.josejacin.madridshops.fragments.ActivitiesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/activity_shop_list__map"
+        tools:layout="@layout/fragment_activities"/>
+        -->
+
 </android.support.constraint.ConstraintLayout>
