@@ -9,13 +9,20 @@ import com.josejacin.madridshops.domain.interactors.activity.GetAllActivitiesInt
 import com.josejacin.madridshops.domain.interactors.activity.GetAllActivitiesInteractorCompletion;
 import com.josejacin.madridshops.domain.interactors.activity.GetAllActivitiesInteractorFakeImpl;
 import com.josejacin.madridshops.domain.model.Activities;
+import com.josejacin.madridshops.fragments.ActivitiesFragment;
+import com.josejacin.madridshops.fragments.ShopsFragment;
 
 public class ActivityListActivity extends AppCompatActivity {
+
+    ActivitiesFragment activitiesFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_list);
+
+        activitiesFragment = (ActivitiesFragment) getSupportFragmentManager().findFragmentById(R.id.activity_activity_list__fragment_activities);
 
         // Obtain activities list
         GetAllActivitiesInteractor getAllActivitiesInteractor = new GetAllActivitiesInteractorFakeImpl();
@@ -24,6 +31,7 @@ public class ActivityListActivity extends AppCompatActivity {
                     @Override
                     public void completion(Activities activities) {
                         System.out.println("Hello hello Activities");
+                        activitiesFragment.setActivities(activities);
                     }
                 },
                 new InteractorErrorCompletion() {

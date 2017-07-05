@@ -1,22 +1,28 @@
 package com.josejacin.madridshops.fragments;
 
-
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.josejacin.madridshops.R;
+import com.josejacin.madridshops.adapters.ActivitiesAdapter;
+import com.josejacin.madridshops.domain.model.Activities;
+import com.josejacin.madridshops.domain.model.Activity;
+import com.josejacin.madridshops.views.OnElementClick;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ActivitiesFragment extends Fragment {
 
+    private OnElementClick<Activity> listener;
+
     private RecyclerView activitiesRecyclerView;
+    private ActivitiesAdapter adapter;
+    private Activities activities;
 
     public ActivitiesFragment() {
         // Required empty public constructor
@@ -34,4 +40,10 @@ public class ActivitiesFragment extends Fragment {
         return view;
     }
 
+    public void setActivities(Activities activities) {
+        this.activities = activities;
+
+        adapter = new ActivitiesAdapter(activities, getActivity());
+        activitiesRecyclerView.setAdapter(adapter);
+    }
 }

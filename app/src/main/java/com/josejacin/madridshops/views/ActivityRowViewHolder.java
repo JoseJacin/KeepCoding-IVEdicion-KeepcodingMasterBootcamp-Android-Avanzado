@@ -37,7 +37,7 @@ public class ActivityRowViewHolder extends RecyclerView.ViewHolder {
         activityNameTextView.setText(activity.getName());
         Picasso.with(context.get()).
                 load(activity.getLogoUrl()).
-                placeholder(R.drawable.shop_placeholder).
+                placeholder(R.drawable.activity_placeholder).
                 into(activityLogoImageView);
 
     }
