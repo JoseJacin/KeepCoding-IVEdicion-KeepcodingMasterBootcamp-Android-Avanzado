@@ -25,7 +25,8 @@ public class ActivityListActivity extends AppCompatActivity {
                     public void completion(Activities activities) {
                         System.out.println("Hello hello Activities");
                     }
-                }, new InteractorErrorCompletion() {
+                },
+                new InteractorErrorCompletion() {
                     @Override
                     public void onError(String errorDescription) {
 

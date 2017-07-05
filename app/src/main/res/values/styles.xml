@@ -22,4 +22,12 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="activity_cell_name_style">
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@color/colorPrimaryDark</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>
