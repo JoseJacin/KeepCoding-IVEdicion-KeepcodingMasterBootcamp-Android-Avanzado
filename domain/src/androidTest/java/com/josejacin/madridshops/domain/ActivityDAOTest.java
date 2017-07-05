@@ -74,6 +74,9 @@ public class ActivityDAOTest {
         assertNotNull(activity);
         assertEquals(insertedActivity.getId(), activity.getId());
         assertEquals(TEST_NAME, activity.getName());
+
+        sut.delete(activity.getId());
+        assertNull(sut.query(activity.getId()));
     }
 
     private Activity insertActivity(ActivityDAO sut, long id, String name, String address, float latitude, float longitude) {
