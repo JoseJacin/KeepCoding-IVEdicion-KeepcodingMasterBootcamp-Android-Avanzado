@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.josejacin.madridshops.R;
 import com.josejacin.madridshops.domain.model.Activities;
 import com.josejacin.madridshops.domain.model.Activity;
+import com.josejacin.madridshops.domain.model.Shop;
 import com.josejacin.madridshops.views.ActivityRowViewHolder;
 import com.josejacin.madridshops.views.OnElementClick;
 
@@ -39,6 +40,16 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivityRowViewHolde
     public void onBindViewHolder(ActivityRowViewHolder activityRow, final int position) {
         final Activity activity = this.activities.get(position);
         activityRow.setShop(activity);
+
+        // Se establece el OnClickListener en toda la celda
+        activityRow.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.clickedOn(activity, position);
+                }
+            }
+        });
     }
 
     @Override
@@ -47,5 +58,9 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivityRowViewHolde
             return (int) this.activities.size();
         }
         return 0;
+    }
+
+    public void setOnClickListener(OnElementClick<Activity> listener) {
+        this.listener = listener;
     }
 }

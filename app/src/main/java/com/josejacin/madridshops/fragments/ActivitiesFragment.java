@@ -14,6 +14,7 @@ import com.josejacin.madridshops.R;
 import com.josejacin.madridshops.adapters.ActivitiesAdapter;
 import com.josejacin.madridshops.domain.model.Activities;
 import com.josejacin.madridshops.domain.model.Activity;
+import com.josejacin.madridshops.domain.model.Shop;
 import com.josejacin.madridshops.views.OnElementClick;
 
 public class ActivitiesFragment extends Fragment {
@@ -45,5 +46,19 @@ public class ActivitiesFragment extends Fragment {
 
         adapter = new ActivitiesAdapter(activities, getActivity());
         activitiesRecyclerView.setAdapter(adapter);
+
+        adapter.setOnClickListener(new OnElementClick<Activity>() {
+            @Override
+            public void clickedOn(@NonNull Activity activity, int position) {
+                Log.d("Click", activity.getName());
+                // Se accede al listener
+                if (listener != null) {
+                    // Llama al listener
+                    listener.clickedOn(activity, position);
+                    // Otra forma de hacerlo
+                    //ShopsFragment.this.listener.clickedOn(shop, position);
+                }
+            }
+        });
     }
 }
