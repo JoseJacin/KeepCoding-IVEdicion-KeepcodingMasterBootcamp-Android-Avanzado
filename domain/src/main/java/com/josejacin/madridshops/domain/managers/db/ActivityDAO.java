@@ -2,6 +2,7 @@ package com.josejacin.madridshops.domain.managers.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,17 +10,10 @@ import android.support.annotation.Nullable;
 import com.josejacin.madridshops.domain.model.Activity;
 import com.josejacin.madridshops.domain.model.Shop;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.josejacin.madridshops.domain.managers.db.DBActivityConstants.*;
-import static com.josejacin.madridshops.domain.managers.db.DBShopConstants.KEY_SHOP_ADDRESS;
-import static com.josejacin.madridshops.domain.managers.db.DBShopConstants.KEY_SHOP_DESCRIPTION;
-import static com.josejacin.madridshops.domain.managers.db.DBShopConstants.KEY_SHOP_IMAGE_URL;
-import static com.josejacin.madridshops.domain.managers.db.DBShopConstants.KEY_SHOP_LATITUDE;
-import static com.josejacin.madridshops.domain.managers.db.DBShopConstants.KEY_SHOP_LOGO_IMAGE_URL;
-import static com.josejacin.madridshops.domain.managers.db.DBShopConstants.KEY_SHOP_LONGITUDE;
-import static com.josejacin.madridshops.domain.managers.db.DBShopConstants.KEY_SHOP_NAME;
-import static com.josejacin.madridshops.domain.managers.db.DBShopConstants.KEY_SHOP_URL;
 
 public class ActivityDAO implements DAOReadable<Activity>, DAOWritable<Activity> {
 
@@ -43,19 +37,63 @@ public class ActivityDAO implements DAOReadable<Activity>, DAOWritable<Activity>
 
     // Methods
     @Override
-    public List<Activity> query() {
-        return null;
+    public @Nullable List<Activity> query() {
+        return query(null, null, KEY_ACTIVITY_ID);
     }
 
     @Override
-    public Activity query(@NonNull long id) {
-        return null;
+    public @Nullable Activity query(@NonNull long id) {
+        // Forma de hacer que no se inyecte código
+        List<Activity> activities = query(KEY_ACTIVITY_ID + " = ?", new String[]{ "" + id }, KEY_ACTIVITY_ID);
+
+        if (activities == null || activities.size() == 0) {
+            return null;
+        }
+
+        return activities.get(0);
     }
 
-    @Nullable
     @Override
-    public List<Activity> query(String where, String[] whereArgs, String orderBy) {
-        return null;
+    public @Nullable List<Activity> query(String where, String[] whereArgs, String orderBy) {
+        Cursor c = dbReadConnection.query(TABLE_ACTIVITY, // Table name
+                ALL_ACTIVITY_COLUMNS,   // Columns I want to obtain
+                where,                  // Where
+                whereArgs,              // Where arguments
+                orderBy,                // Order by
+                null,                   // Group by
+                null);                  // Having
+
+        if (c == null || c.getCount() == 0) {
+            // La consulta ha ido mal o no se han recuperado datos
+            return null;
+        }
+
+        List<Activity> activitiesList = new ArrayList<>();
+
+        while (c.moveToNext()) {
+            long id = c.getLong(c.getColumnIndex(KEY_ACTIVITY_ID));
+            String name = c.getString(c.getColumnIndex(KEY_ACTIVITY_NAME));
+            String address = c.getString(c.getColumnIndex(KEY_ACTIVITY_ADDRESS));
+            String description = c.getString(c.getColumnIndex(KEY_ACTIVITY_DESCRIPTION));
+            String imageUrl = c.getString(c.getColumnIndex(KEY_ACTIVITY_IMAGE_URL));
+            String logoImageUrl = c.getString(c.getColumnIndex(KEY_ACTIVITY_LOGO_IMAGE_URL));
+            String url = c.getString(c.getColumnIndex(KEY_ACTIVITY_URL));
+            Float latitude = c.getFloat(c.getColumnIndex(KEY_ACTIVITY_LATITUDE));
+            Float longitude = c.getFloat(c.getColumnIndex(KEY_ACTIVITY_LONGITUDE));
+
+            Activity activity = Activity.of(id, name)
+                    .setAddress(address)
+                    .setDescription(description)
+                    .setImageUrl(imageUrl)
+                    .setLogoUrl(logoImageUrl)
+                    .setUrl(url)
+                    .setLatitude(latitude)
+                    .setLongitude(longitude);
+
+            activitiesList.add(activity);
+        }
+
+        return activitiesList;
     }
 
     @Override
