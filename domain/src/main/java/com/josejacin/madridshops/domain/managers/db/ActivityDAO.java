@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.josejacin.madridshops.domain.model.Activity;
-import com.josejacin.madridshops.domain.model.Shop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,26 +148,42 @@ public class ActivityDAO implements DAOReadable<Activity>, DAOWritable<Activity>
 
     @Override
     public long delete(@NonNull Activity element) {
-        return 0;
+        return delete(element.getId());
     }
 
     @Override
     public long delete(@NonNull long id) {
-        return 0;
+        return delete(KEY_ACTIVITY_ID + " = ?", "" + id);
     }
 
     @Override
     public void deleteAll() {
-
+        delete(null, null);
     }
 
     @Override
     public long delete(String where, String... whereClause) {
-        return 0;
+        int deletedRegs = 0;
+        dbWriteConnection.beginTransaction();
+
+        // Se realiza el borrado
+        try {
+            deletedRegs = dbWriteConnection.delete(TABLE_ACTIVITY, where, whereClause);
+            // Se indica a la transacción que no ha habido errores
+            dbWriteConnection.setTransactionSuccessful();
+        } finally {
+            // Se cierra la transacción
+            // Si se ha ejecutado setTransactionSuccessful se realiza un commit
+            // Si no se ha ejecutado setTransactionSuccessful se realiza un rollback
+            dbWriteConnection.endTransaction();
+        }
+        return deletedRegs;
     }
 
     @Override
     public int numRecords() {
-        return 0;
+        List<Activity> activityList = query();
+
+        return activityList == null ? 0 : activityList.size();
     }
 }
