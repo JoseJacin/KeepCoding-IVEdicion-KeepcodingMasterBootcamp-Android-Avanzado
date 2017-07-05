@@ -26,8 +26,8 @@ public class ActivityEntityIntoActivitiesMapper {
             Activity activity = Activity.of(activityEntity.getId(), activityEntity.getName());
 
             activity.setDescription(activityEntity.getDescription_es());
-            activity.setLatitude(activityEntity.getGps_lat());
-            activity.setLongitude(activityEntity.getGps_lon());
+            activity.setLatitude(getCorrectCoordinateComponent(activityEntity.getGps_lat()));
+            activity.setLongitude(getCorrectCoordinateComponent(activityEntity.getGps_lon()));
             activity.setAddress(activityEntity.getAddress());
             activity.setUrl(activityEntity.getUrl());
             activity.setImageUrl(activityEntity.getImg());
@@ -37,5 +37,19 @@ public class ActivityEntityIntoActivitiesMapper {
         }
 
         return activities;
+    }
+
+    public static float getCorrectCoordinateComponent(String coordinateComponent) {
+        // Problem: JSON has this errors "-3.9018104,275"
+        float coordinate = 0.0f; //TODO: Esto debería ser una coordenada por defecto de, por ejemplo, el centro de Madrid
+
+        String s = coordinateComponent.replace(",","");
+        try {
+            coordinate = Float.parseFloat(s);
+        } catch (Exception e) {
+            Log.d("ERROR CONVERTING", String.format("Can't convert %s", coordinateComponent));
+        }
+
+        return coordinate;
     }
 }
