@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class ShopDetailActivity extends AppCompatActivity {
 
-    @BindView((R.id.activity_shop_detail__shop_address)) TextView address;
+    @BindView(R.id.activity_shop_detail__shop_address) TextView address;
     @BindView(R.id.activity_shop_detail__shop_description) TextView description;
     @BindView(R.id.activity_shop_detail__shop_image) ImageView shopImage;
     @BindView(R.id.activity_shop_detail__shop_map) ImageView mapImage;

@@ -55,10 +55,12 @@ public class ActivitiesFragment extends Fragment {
                 if (listener != null) {
                     // Llama al listener
                     listener.clickedOn(activity, position);
-                    // Otra forma de hacerlo
-                    //ShopsFragment.this.listener.clickedOn(shop, position);
                 }
             }
         });
+    }
+
+    public void setOnElementClickListener(OnElementClick<Activity> listener) {
+        this.listener = listener;
     }
 }
