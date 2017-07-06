@@ -60,9 +60,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        launchInBackgroundThread();
+        //launchInBackgroundThread();
     }
 
+    /*
     private  void launchInBackgroundThread() {
         // onPreExecute (Antes de lanzar el hilo)
 
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         br.close();
         return out.toString();
     }
+    */
 
     // Esto es lo mismo que usar @BindView y crear un setOnClickListener
     @OnClick(R.id.activity_main__clear_cache_button) void clearCache() {
