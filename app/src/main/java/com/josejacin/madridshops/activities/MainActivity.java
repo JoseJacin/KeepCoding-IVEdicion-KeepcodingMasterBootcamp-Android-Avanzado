@@ -9,6 +9,8 @@ import android.widget.Button;
 import com.josejacin.madridshops.R;
 import com.josejacin.madridshops.domain.interactors.ClearCacheInteractor;
 import com.josejacin.madridshops.domain.interactors.ClearCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.activity.SetAllActivitiesAreCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.activity.SetAllActivitiesAreCacheInteractorImpl;
 import com.josejacin.madridshops.domain.interactors.shop.SetAllShopsAreCacheInteractor;
 import com.josejacin.madridshops.domain.interactors.shop.SetAllShopsAreCacheInteractorImpl;
 import com.josejacin.madridshops.domain.managers.cache.ClearCacheManager;
@@ -136,6 +138,10 @@ public class MainActivity extends AppCompatActivity {
                         // Se establece el indicador de que las Shops ya se han almacenado en BBDD a false
                         SetAllShopsAreCacheInteractor setAllShopsAreCachedInteractor = new SetAllShopsAreCacheInteractorImpl(getBaseContext());
                         setAllShopsAreCachedInteractor.execute(false);
+
+                        // Se establece el indicador de que las Activities ya se han almacenado en BBDD a false
+                        SetAllActivitiesAreCacheInteractor setAllActivitiesAreCachedInteractor = new SetAllActivitiesAreCacheInteractorImpl(getBaseContext());
+                        setAllActivitiesAreCachedInteractor.execute(false);
                     }
                 }
         );
