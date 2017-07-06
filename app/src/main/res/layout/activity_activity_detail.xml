@@ -51,6 +51,13 @@
                 android:layout_height="wrap_content"
                 tools:text="Description"/>
 
+            <ImageView
+                android:id="@+id/activity_activity_detail__activity_map"
+                android:layout_below="@+id/activity_activity_detail__activity_description"
+                tools:src="@drawable/map_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
