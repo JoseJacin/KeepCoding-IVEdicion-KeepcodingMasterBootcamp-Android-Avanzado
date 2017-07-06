@@ -1,11 +1,23 @@
 package com.josejacin.madridshops.domain.model;
 
+import android.support.annotation.NonNull;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class Activities implements ActivitiesIterable, ActivitiesUpdatable {
     // Properties
     private List<Activity> activities;
+
+    public static Activities from(@NonNull final List<Activity> activityList) {
+        final Activities activities = new Activities();
+
+        for (final Activity activity : activityList) {
+            activities.add(activity);
+        }
+
+        return activities;
+    }
 
     public Activities() {
     }
@@ -56,6 +68,4 @@ public class Activities implements ActivitiesIterable, ActivitiesUpdatable {
 
         return listCopy;
     }
-
-
 }

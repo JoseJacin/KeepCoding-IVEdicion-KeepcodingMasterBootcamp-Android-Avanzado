@@ -8,17 +8,32 @@ import android.widget.ProgressBar;
 
 import com.josejacin.madridshops.R;
 import com.josejacin.madridshops.domain.interactors.InteractorErrorCompletion;
+import com.josejacin.madridshops.domain.interactors.activity.GetAllActivitiesFromCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.activity.GetAllActivitiesFromCacheInteractorImpl;
 import com.josejacin.madridshops.domain.interactors.activity.GetAllActivitiesInteractor;
 import com.josejacin.madridshops.domain.interactors.activity.GetAllActivitiesInteractorCompletion;
 import com.josejacin.madridshops.domain.interactors.activity.GetAllActivitiesInteractorImpl;
 import com.josejacin.madridshops.domain.interactors.activity.GetIfAllActivitiesAreCacheInteractor;
 import com.josejacin.madridshops.domain.interactors.activity.GetIfAllActivitiesAreCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.activity.SaveAllActivitiesIntoCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.activity.SaveAllActivitiesIntoCacheInteractorImpl;
 import com.josejacin.madridshops.domain.interactors.activity.SetAllActivitiesAreCacheInteractor;
 import com.josejacin.madridshops.domain.interactors.activity.SetAllActivitiesAreCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsFromCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsFromCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsInteractorCompletion;
+import com.josejacin.madridshops.domain.managers.cache.activity.GetAllActivitiesFromCacheManager;
+import com.josejacin.madridshops.domain.managers.cache.activity.GetAllActivitiesFromCacheManagerDAOImpl;
+import com.josejacin.madridshops.domain.managers.cache.activity.SaveAllActivitiesIntoCacheManager;
+import com.josejacin.madridshops.domain.managers.cache.activity.SaveAllActivitiesIntoCacheManagerDAOImpl;
+import com.josejacin.madridshops.domain.managers.cache.shop.GetAllShopsFromCacheManager;
+import com.josejacin.madridshops.domain.managers.cache.shop.GetAllShopsFromCacheManagerDAOImpl;
 import com.josejacin.madridshops.domain.managers.network.ActivitiesNetworkManager;
 import com.josejacin.madridshops.domain.managers.network.GetAllActivitiesManagerImpl;
 import com.josejacin.madridshops.domain.model.Activities;
 import com.josejacin.madridshops.domain.model.Activity;
+import com.josejacin.madridshops.domain.model.Shop;
+import com.josejacin.madridshops.domain.model.Shops;
 import com.josejacin.madridshops.fragments.ActivitiesFragment;
 import com.josejacin.madridshops.navigator.Navigator;
 import com.josejacin.madridshops.views.OnElementClick;
@@ -46,7 +61,7 @@ public class ActivityListActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         // Las actividades ya se encuentran en BBDD. No hay que leer de red, sino de BBDD
-
+                        readDataFromCache();
                     }
                 },
                 new Runnable() {
@@ -60,6 +75,17 @@ public class ActivityListActivity extends AppCompatActivity {
         );
     }
 
+    private void readDataFromCache() {
+        GetAllActivitiesFromCacheManager getAllActivitiesFromCacheManager = new GetAllActivitiesFromCacheManagerDAOImpl(this);
+        GetAllActivitiesFromCacheInteractor getAllActivitiesFromCacheInteractor = new GetAllActivitiesFromCacheInteractorImpl(getAllActivitiesFromCacheManager);
+        getAllActivitiesFromCacheInteractor.execute(new GetAllActivitiesInteractorCompletion() {
+            @Override
+            public void completion(@NonNull Activities activities) {
+                configActivitiesFragment(activities);
+            }
+        });
+    }
+
     private void obtainActivitiesList() {
         // Se establece el spinner (ProgressBar)
         progressBar.setVisibility(View.VISIBLE);
@@ -70,21 +96,21 @@ public class ActivityListActivity extends AppCompatActivity {
                 new GetAllActivitiesInteractorCompletion() {
                     @Override
                     public void completion(Activities activities) {
-                        System.out.println("Hello hello Activities");
-
-                        // Se quita el spinner (ProgressBar)
-                        progressBar.setVisibility(View.INVISIBLE);
-
-                        SetAllActivitiesAreCacheInteractor setAllActivitiesAreCacheInteractor = new SetAllActivitiesAreCacheInteractorImpl(getBaseContext());
-                        setAllActivitiesAreCacheInteractor.execute(true);
-
-                        activitiesFragment.setActivities(activities);
-                        activitiesFragment.setOnElementClickListener(new OnElementClick<Activity>() {
+                        // Se guardan las actividades en BBDD
+                        SaveAllActivitiesIntoCacheManager saveManager = new SaveAllActivitiesIntoCacheManagerDAOImpl(getBaseContext());
+                        SaveAllActivitiesIntoCacheInteractor saveInteractor = new SaveAllActivitiesIntoCacheInteractorImpl(saveManager);
+                        saveInteractor.execute(activities, new Runnable() {
                             @Override
-                            public void clickedOn(@NonNull Activity element, int position) {
-                                Navigator.navigateFromActivityListActivityToActivityDetailActivity(ActivityListActivity.this, element, position);
+                            public void run() {
+                                // Se establece el indicador de que las Activities ya se han almacenado en BBDD a true
+                                SetAllActivitiesAreCacheInteractor setAllActivitiesAreCacheInteractor = new SetAllActivitiesAreCacheInteractorImpl(getBaseContext());
+                                setAllActivitiesAreCacheInteractor.execute(true);
                             }
                         });
+
+                        configActivitiesFragment(activities);
+                        // Se quita el spinner (ProgressBar)
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 },
                 new InteractorErrorCompletion() {
@@ -93,5 +119,21 @@ public class ActivityListActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    private void configActivitiesFragment(final Activities activities) {
+        activitiesFragment.setActivities(activities);
+        // Se establece el listener
+        activitiesFragment.setOnElementClickListener(new OnElementClick<Activity>() {
+            @Override
+            public void clickedOn(@NonNull Activity element, int position) {
+                // Se accede a la actividad de detalle
+                // Parámetros
+                // Puntero a la actividad de detalle
+                // Elemento
+                // Posición pulsada
+                Navigator.navigateFromActivityListActivityToActivityDetailActivity(ActivityListActivity.this, element, position);
+            }
+        });
     }
 }

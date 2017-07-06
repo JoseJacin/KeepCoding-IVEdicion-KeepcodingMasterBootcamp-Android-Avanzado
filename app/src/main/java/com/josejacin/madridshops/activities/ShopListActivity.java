@@ -170,33 +170,32 @@ public class ShopListActivity extends AppCompatActivity {
         ShopsNetworkManager manager = new GetAllShopsManagerImpl(this);
         GetAllShopsInteractor getAllShopsInteractor = new GetAllShopsInteractorImpl(manager);
         getAllShopsInteractor.execute(
-            new GetAllShopsInteractorCompletion() {
-                @Override
-                public void completion(Shops shops) {
-                    // Se guardan las tiendas en BBDD
-                    SaveAllShopsIntoCacheManager saveManager = new SaveAllShopsIntoCacheManagerDAOImpl(getBaseContext());
-                    SaveAllShopsIntoCacheInteractor saveInteractor = new SaveAllShopsIntoCacheInteractorImpl(saveManager);
-                    saveInteractor.execute(shops, new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Se establece el indicador de que las Shops ya se han almacenado en BBDD a true
-                                    SetAllShopsAreCacheInteractor setAllShopsCacheInteractor = new SetAllShopsAreCacheInteractorImpl(getBaseContext());
-                                    setAllShopsCacheInteractor.execute(true);
-                                }
-                            });
+                new GetAllShopsInteractorCompletion() {
+                    @Override
+                    public void completion(Shops shops) {
+                        // Se guardan las tiendas en BBDD
+                        SaveAllShopsIntoCacheManager saveManager = new SaveAllShopsIntoCacheManagerDAOImpl(getBaseContext());
+                        SaveAllShopsIntoCacheInteractor saveInteractor = new SaveAllShopsIntoCacheInteractorImpl(saveManager);
+                        saveInteractor.execute(shops, new Runnable() {
+                            @Override
+                            public void run() {
+                                // Se establece el indicador de que las Shops ya se han almacenado en BBDD a true
+                                SetAllShopsAreCacheInteractor setAllShopsCacheInteractor = new SetAllShopsAreCacheInteractorImpl(getBaseContext());
+                                setAllShopsCacheInteractor.execute(true);
+                            }
+                        });
 
-                    configShopsFragment(shops);
-                    // Se quita el spinner (ProgressBar)
-                    progressBar.setVisibility(View.INVISIBLE);
-                }
-            },
-            new InteractorErrorCompletion() {
-                @Override
-                public void onError(String errorDescription) {
-                    System.out.println("Hay un error: " + errorDescription);
-                }
-            }
-        );
+                        configShopsFragment(shops);
+                        // Se quita el spinner (ProgressBar)
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                },
+                new InteractorErrorCompletion() {
+                    @Override
+                    public void onError(String errorDescription) {
+                        System.out.println("Hay un error: " + errorDescription);
+                    }
+                });
     }
 
     private void configShopsFragment(final Shops shops) {
