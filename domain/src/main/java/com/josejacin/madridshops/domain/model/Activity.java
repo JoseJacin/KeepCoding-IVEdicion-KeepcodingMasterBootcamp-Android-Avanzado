@@ -2,7 +2,9 @@ package com.josejacin.madridshops.domain.model;
 
 import android.support.annotation.NonNull;
 
-public class Activity {
+import java.io.Serializable;
+
+public class Activity implements Serializable {
     private long id;
     private String name;
     private String imageUrl;
