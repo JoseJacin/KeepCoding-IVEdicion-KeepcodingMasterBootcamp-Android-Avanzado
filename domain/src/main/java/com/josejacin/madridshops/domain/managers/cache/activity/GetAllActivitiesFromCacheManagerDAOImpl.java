@@ -22,13 +22,26 @@ public class GetAllActivitiesFromCacheManagerDAOImpl implements GetAllActivities
 
     @Override
     public void execute(@NonNull final GetAllActivitiesFromCacheManagerCompletion completion) {
-        ActivityDAO dao = new ActivityDAO(contextWeakReference.get());
-        List<Activity> activityList = dao.query();
-        if (activityList == null) {
-            return;
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ActivityDAO dao = new ActivityDAO(contextWeakReference.get());
+                List<Activity> activityList = dao.query();
+                if (activityList == null) {
+                    return;
+                }
 
-        Activities activities = Activities.from(activityList);
-        completion.completion(activities);
+                final Activities activities = Activities.from(activityList);
+
+                // Se accede al hilo principal
+                Handler uiHandler = new Handler(Looper.getMainLooper());
+                uiHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        completion.completion(activities);
+                    }
+                });
+            }
+        }).start();
     }
 }

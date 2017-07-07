@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 public class MapUtil {
-    private void centerMapInPosition(GoogleMap googleMap, double latitude, double longitude) {
+    public static void centerMapInPosition(GoogleMap googleMap, double latitude, double longitude) {
         CameraPosition cameraPosition = new CameraPosition.Builder().target(
                 new LatLng(latitude, longitude)).zoom(12).build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));

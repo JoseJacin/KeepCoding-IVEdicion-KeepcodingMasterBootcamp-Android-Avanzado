@@ -1,22 +1,24 @@
 package com.josejacin.madridshops.activities;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.josejacin.madridshops.R;
+import com.josejacin.madridshops.domain.interactors.InteractorErrorCompletion;
 import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsFromCacheInteractor;
 import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsFromCacheInteractorImpl;
 import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsInteractor;
@@ -24,7 +26,6 @@ import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsInteractorCo
 import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsInteractorImpl;
 import com.josejacin.madridshops.domain.interactors.shop.GetIfAllShopsAreCacheInteractor;
 import com.josejacin.madridshops.domain.interactors.shop.GetIfAllShopsAreCacheInteractorImpl;
-import com.josejacin.madridshops.domain.interactors.InteractorErrorCompletion;
 import com.josejacin.madridshops.domain.interactors.shop.SaveAllShopsIntoCacheInteractor;
 import com.josejacin.madridshops.domain.interactors.shop.SaveAllShopsIntoCacheInteractorImpl;
 import com.josejacin.madridshops.domain.interactors.shop.SetAllShopsAreCacheInteractor;
@@ -50,7 +51,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE;
-//import static com.josejacin.madridshops.util.map.MapUtil.centerMapInPosition;
+import static com.josejacin.madridshops.util.map.MapUtil.centerMapInPosition;
+
 
 public class ShopListActivity extends AppCompatActivity {
 
@@ -115,7 +117,7 @@ public class ShopListActivity extends AppCompatActivity {
 
     public void addDataToMap(GoogleMap map) {
         // Se solicitan los permisos al usuario
-        /*if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+        if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -125,31 +127,25 @@ public class ShopListActivity extends AppCompatActivity {
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             return;
-        }*/
+        }
 
         centerMapInPosition(map, 40.411335, -3.674908);
         map.setBuildingsEnabled(true);
         map.setMapType(MAP_TYPE_SATELLITE);
         map.getUiSettings().setRotateGesturesEnabled(true);
         map.getUiSettings().setZoomControlsEnabled(true);
-        //map.setMyLocationEnabled(true);
+        map.setMyLocationEnabled(true);
 
         MarkerOptions retiroMarkerOptions = new MarkerOptions()
                 .position(new LatLng(40.411335, -3.674908))
-                .title("Hello world").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                .title("Retiro").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
 
         MarkerOptions retiroMarkerOptions2 = new MarkerOptions()
                 .position(new LatLng(42, -3.674908))
-                .title("Hello world").icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_camera));
+                .title("Retiro 2").icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_camera));
 
         Marker marker = map.addMarker(retiroMarkerOptions);
         map.addMarker(retiroMarkerOptions2);
-    }
-
-    private void centerMapInPosition(GoogleMap googleMap, double latitude, double longitude) {
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(
-                new LatLng(latitude, longitude)).zoom(12).build();
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
     private void readDataFromCache() {
