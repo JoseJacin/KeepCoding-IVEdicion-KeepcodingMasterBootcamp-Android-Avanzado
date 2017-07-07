@@ -38,6 +38,7 @@ import com.josejacin.madridshops.domain.managers.network.ActivitiesNetworkManage
 import com.josejacin.madridshops.domain.managers.network.GetAllActivitiesManagerImpl;
 import com.josejacin.madridshops.domain.model.Activities;
 import com.josejacin.madridshops.domain.model.Activity;
+import com.josejacin.madridshops.domain.model.Shop;
 import com.josejacin.madridshops.fragments.ActivitiesFragment;
 import com.josejacin.madridshops.navigator.Navigator;
 import com.josejacin.madridshops.util.map.MapPinnable;
@@ -213,5 +214,16 @@ public class ActivityListActivity extends AppCompatActivity {
     private void putShopsPinsOnMap(Activities activities) {
         List<MapPinnable> activityPins = ActivityPin.activityPinsFromActivities(activities);
         MapUtil.addPins(activityPins, map, this);
+
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                if (marker.getTag() == null || !(marker.getTag() instanceof Activity)) {
+                    return;
+                }
+                Activity activity = (Activity) marker.getTag();
+                Navigator.navigateFromActivityListActivityToActivityDetailActivity(ActivityListActivity.this, activity, 0);
+            }
+        });
     }
 }
