@@ -16,7 +16,7 @@ import com.josejacin.madridshops.domain.managers.network.jsonparser.ShopsJsonPar
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class GetAllShopsManagerImpl implements NetworkManager {
+public class GetAllShopsManagerImpl implements ShopsNetworkManager {
 
     WeakReference<Context> weakContext;
 

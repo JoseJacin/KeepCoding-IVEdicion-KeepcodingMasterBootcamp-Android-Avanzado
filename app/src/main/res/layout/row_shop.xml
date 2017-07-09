@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="100dp" >
 
+    <ImageView
+        android:id="@+id/row_shops__shops_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:alpha="0.4"
+        android:adjustViewBounds="true"
+        tools:src="@android:drawable/alert_dark_frame" />
+
     <TextView
         android:id="@+id/row_shop__shop_name"
         android:layout_width="match_parent"

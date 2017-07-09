@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class ShopDetailActivity extends AppCompatActivity {
 
-    @BindView((R.id.activity_shop_detail__shop_address)) TextView address;
+    @BindView(R.id.activity_shop_detail__shop_address) TextView address;
     @BindView(R.id.activity_shop_detail__shop_description) TextView description;
     @BindView(R.id.activity_shop_detail__shop_image) ImageView shopImage;
     @BindView(R.id.activity_shop_detail__shop_map) ImageView mapImage;
@@ -41,7 +41,7 @@ public class ShopDetailActivity extends AppCompatActivity {
                     placeholder(R.drawable.shop_placeholder).
                     into(shopImage);
 
-            String staticMapUrl = StaticMapImage.getMapImageUrl(shop);
+            String staticMapUrl = StaticMapImage.getMapImageUrlToShop(shop);
             Picasso.with(this).
                     load(staticMapUrl).
                     placeholder(R.drawable.map_placeholder).

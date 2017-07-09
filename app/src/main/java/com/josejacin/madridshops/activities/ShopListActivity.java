@@ -10,34 +10,32 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.josejacin.madridshops.R;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsFromCacheInteractor;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsFromCacheInteractorImpl;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsInteractor;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsInteractorCompletion;
-import com.josejacin.madridshops.domain.interactors.GetAllShopsInteractorImpl;
-import com.josejacin.madridshops.domain.interactors.GetIfAllShopsAreCacheInteractor;
-import com.josejacin.madridshops.domain.interactors.GetIfAllShopsAreCacheInteractorImpl;
 import com.josejacin.madridshops.domain.interactors.InteractorErrorCompletion;
-import com.josejacin.madridshops.domain.interactors.SaveAllShopsIntoCacheInteractor;
-import com.josejacin.madridshops.domain.interactors.SaveAllShopsIntoCacheInteractorImpl;
-import com.josejacin.madridshops.domain.interactors.SetAllShopsAreCacheInteractor;
-import com.josejacin.madridshops.domain.interactors.SetAllShopsAreCacheInteractorImpl;
-import com.josejacin.madridshops.domain.managers.cache.GetAllShopsFromCacheManager;
-import com.josejacin.madridshops.domain.managers.cache.GetAllShopsFromCacheManagerDAOImpl;
-import com.josejacin.madridshops.domain.managers.cache.SaveAllShopsIntoCacheManager;
-import com.josejacin.madridshops.domain.managers.cache.SaveAllShopsIntoCacheManagerDAOImpl;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsFromCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsFromCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsInteractorCompletion;
+import com.josejacin.madridshops.domain.interactors.shop.GetAllShopsInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.GetIfAllShopsAreCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.GetIfAllShopsAreCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.SaveAllShopsIntoCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.SaveAllShopsIntoCacheInteractorImpl;
+import com.josejacin.madridshops.domain.interactors.shop.SetAllShopsAreCacheInteractor;
+import com.josejacin.madridshops.domain.interactors.shop.SetAllShopsAreCacheInteractorImpl;
+import com.josejacin.madridshops.domain.managers.cache.shop.GetAllShopsFromCacheManager;
+import com.josejacin.madridshops.domain.managers.cache.shop.GetAllShopsFromCacheManagerDAOImpl;
+import com.josejacin.madridshops.domain.managers.cache.shop.SaveAllShopsIntoCacheManager;
+import com.josejacin.madridshops.domain.managers.cache.shop.SaveAllShopsIntoCacheManagerDAOImpl;
 import com.josejacin.madridshops.domain.managers.network.GetAllShopsManagerImpl;
-import com.josejacin.madridshops.domain.managers.network.NetworkManager;
+import com.josejacin.madridshops.domain.managers.network.ShopsNetworkManager;
 import com.josejacin.madridshops.domain.model.Shop;
 import com.josejacin.madridshops.domain.model.Shops;
 import com.josejacin.madridshops.fragments.ShopsFragment;
@@ -47,14 +45,14 @@ import com.josejacin.madridshops.util.map.MapUtil;
 import com.josejacin.madridshops.util.map.model.ShopPin;
 import com.josejacin.madridshops.views.OnElementClick;
 
-
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE;
-//import static com.josejacin.madridshops.util.map.MapUtil.centerMapInPosition;
+import static com.josejacin.madridshops.util.map.MapUtil.centerMapInPosition;
+
 
 public class ShopListActivity extends AppCompatActivity {
 
@@ -119,7 +117,7 @@ public class ShopListActivity extends AppCompatActivity {
 
     public void addDataToMap(GoogleMap map) {
         // Se solicitan los permisos al usuario
-        /*if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+        if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -129,31 +127,20 @@ public class ShopListActivity extends AppCompatActivity {
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             return;
-        }*/
+        }
 
-        centerMapInPosition(map, 40.411335, -3.674908);
-        map.setBuildingsEnabled(true);
-        map.setMapType(MAP_TYPE_SATELLITE);
-        map.getUiSettings().setRotateGesturesEnabled(true);
-        map.getUiSettings().setZoomControlsEnabled(true);
-        //map.setMyLocationEnabled(true);
+        this.map = MapUtil.configureMap(map);
 
         MarkerOptions retiroMarkerOptions = new MarkerOptions()
                 .position(new LatLng(40.411335, -3.674908))
-                .title("Hello world").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                .title("Retiro").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
 
         MarkerOptions retiroMarkerOptions2 = new MarkerOptions()
                 .position(new LatLng(42, -3.674908))
-                .title("Hello world").icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_camera));
+                .title("Retiro 2").icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_camera));
 
         Marker marker = map.addMarker(retiroMarkerOptions);
         map.addMarker(retiroMarkerOptions2);
-    }
-
-    private void centerMapInPosition(GoogleMap googleMap, double latitude, double longitude) {
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(
-                new LatLng(latitude, longitude)).zoom(12).build();
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
     private void readDataFromCache() {
@@ -171,36 +158,35 @@ public class ShopListActivity extends AppCompatActivity {
         // Se establece el spinner (ProgressBar)
         progressBar.setVisibility(View.VISIBLE);
 
-        NetworkManager manager = new GetAllShopsManagerImpl(this);
+        ShopsNetworkManager manager = new GetAllShopsManagerImpl(this);
         GetAllShopsInteractor getAllShopsInteractor = new GetAllShopsInteractorImpl(manager);
         getAllShopsInteractor.execute(
-            new GetAllShopsInteractorCompletion() {
-                @Override
-                public void completion(Shops shops) {
-                    // Se guardan las tiendas en BBDD
-                    SaveAllShopsIntoCacheManager saveManager = new SaveAllShopsIntoCacheManagerDAOImpl(getBaseContext());
-                    SaveAllShopsIntoCacheInteractor saveInteractor = new SaveAllShopsIntoCacheInteractorImpl(saveManager);
-                    saveInteractor.execute(shops, new Runnable() {
-                                @Override
-                                public void run() {
-                                    // Se establece el indicador de que las Shops ya se han almacenado en BBDD a true
-                                    SetAllShopsAreCacheInteractor setAllShopsCacheInteractor = new SetAllShopsAreCacheInteractorImpl(getBaseContext());
-                                    setAllShopsCacheInteractor.execute(true);
-                                }
-                            });
+                new GetAllShopsInteractorCompletion() {
+                    @Override
+                    public void completion(Shops shops) {
+                        // Se guardan las tiendas en BBDD
+                        SaveAllShopsIntoCacheManager saveManager = new SaveAllShopsIntoCacheManagerDAOImpl(getBaseContext());
+                        SaveAllShopsIntoCacheInteractor saveInteractor = new SaveAllShopsIntoCacheInteractorImpl(saveManager);
+                        saveInteractor.execute(shops, new Runnable() {
+                            @Override
+                            public void run() {
+                                // Se establece el indicador de que las Shops ya se han almacenado en BBDD a true
+                                SetAllShopsAreCacheInteractor setAllShopsCacheInteractor = new SetAllShopsAreCacheInteractorImpl(getBaseContext());
+                                setAllShopsCacheInteractor.execute(true);
+                            }
+                        });
 
-                    configShopsFragment(shops);
-                    // Se quita el spinner (ProgressBar)
-                    progressBar.setVisibility(View.INVISIBLE);
-                }
-            },
-            new InteractorErrorCompletion() {
-                @Override
-                public void onError(String errorDescription) {
-                    System.out.println("Hay un error: " + errorDescription);
-                }
-            }
-        );
+                        configShopsFragment(shops);
+                        // Se quita el spinner (ProgressBar)
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                },
+                new InteractorErrorCompletion() {
+                    @Override
+                    public void onError(String errorDescription) {
+                        System.out.println("Hay un error: " + errorDescription);
+                    }
+                });
     }
 
     private void configShopsFragment(final Shops shops) {

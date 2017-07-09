@@ -71,6 +71,9 @@ public class ShopDAOTest {
         assertNotNull(shop);
         assertEquals(insertedShop.getId(), shop.getId());
         assertEquals(TEST_NAME, shop.getName());
+
+        sut.delete(shop.getId());
+        assertNull(sut.query(shop.getId()));
     }
 
     private Shop insertShop(ShopDAO sut, long id, String name, String address, float latitude, float longitude) {

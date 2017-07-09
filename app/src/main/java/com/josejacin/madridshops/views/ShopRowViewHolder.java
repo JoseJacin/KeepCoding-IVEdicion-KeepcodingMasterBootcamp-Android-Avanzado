@@ -16,6 +16,7 @@ public class ShopRowViewHolder extends RecyclerView.ViewHolder {
 
     private TextView shopNameTextView;
     private ImageView shopLogoImageView;
+    private ImageView shopImgImageView;
     WeakReference<Context> context;
 
     // El constructor se ejecuta tantas veces como celdas quepan en la pantalla más otras dos para tener caché
@@ -28,6 +29,8 @@ public class ShopRowViewHolder extends RecyclerView.ViewHolder {
 
         shopNameTextView = (TextView) rowShop.findViewById(R.id.row_shop__shop_name);
         shopLogoImageView = (ImageView) rowShop.findViewById(R.id.row_shop__shop_logo);
+        shopImgImageView = (ImageView) rowShop.findViewById(R.id.row_shops__shops_img);
+
     }
 
     public void setShop(Shop shop) {
@@ -40,6 +43,11 @@ public class ShopRowViewHolder extends RecyclerView.ViewHolder {
                 load(shop.getLogoUrl()).
                 placeholder(R.drawable.shop_placeholder).
                 into(shopLogoImageView);
+
+        Picasso.with(context.get()).
+                load(shop.getImageUrl()).
+                placeholder(R.drawable.shop_placeholder).
+                into(shopImgImageView);
 
     }
 }

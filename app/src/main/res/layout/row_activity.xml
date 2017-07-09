@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp" >
+
+    <ImageView
+        android:id="@+id/row_activity__activity_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:alpha="0.4"
+        android:adjustViewBounds="true"
+        tools:src="@android:drawable/alert_dark_frame" />
+
+    <TextView
+        android:id="@+id/row_activity__activity_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        tools:text="The super mega evil activity!"
+        style="@style/activity_cell_name_style"/>
+
+    <ImageView
+        android:id="@+id/row_activity__activity_logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        tools:src="@android:drawable/alert_dark_frame" />
+
+</RelativeLayout>
