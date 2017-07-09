@@ -129,12 +129,7 @@ public class ShopListActivity extends AppCompatActivity {
             return;
         }
 
-        centerMapInPosition(map, 40.411335, -3.674908);
-        map.setBuildingsEnabled(true);
-        map.setMapType(MAP_TYPE_SATELLITE);
-        map.getUiSettings().setRotateGesturesEnabled(true);
-        map.getUiSettings().setZoomControlsEnabled(true);
-        map.setMyLocationEnabled(true);
+        this.map = MapUtil.configureMap(map);
 
         MarkerOptions retiroMarkerOptions = new MarkerOptions()
                 .position(new LatLng(40.411335, -3.674908))

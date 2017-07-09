@@ -128,24 +128,10 @@ public class ActivityListActivity extends AppCompatActivity {
             return;
         }
 
-        centerMapInPosition(map, 40.411335, -3.674908);
-        map.setBuildingsEnabled(true);
-        map.setMapType(MAP_TYPE_SATELLITE);
-        map.getUiSettings().setRotateGesturesEnabled(true);
-        map.getUiSettings().setZoomControlsEnabled(true);
-        map.setMyLocationEnabled(true);
-
-        MarkerOptions retiroMarkerOptions = new MarkerOptions()
-                .position(new LatLng(40.411335, -3.674908))
-                .title("Retiro").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-
-        MarkerOptions retiroMarkerOptions2 = new MarkerOptions()
-                .position(new LatLng(42, -3.674908))
-                .title("Retiro 2").icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_camera));
-
-        Marker marker = map.addMarker(retiroMarkerOptions);
-        map.addMarker(retiroMarkerOptions2);
+        this.map = MapUtil.configureMap(map);
     }
+
+
 
     private void readDataFromCache() {
         GetAllActivitiesFromCacheManager getAllActivitiesFromCacheManager = new GetAllActivitiesFromCacheManagerDAOImpl(this);

@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MadridShops</string>
     <string name="activity_main__clear_cache_button_text">Clear cache</string>
+    <string name="activity_main__not_connection_alert">There is no connection. The information on the device will be displayed</string>
+    <string name="activity_main__not_connection_alert_title">No connection</string>
 </resources>

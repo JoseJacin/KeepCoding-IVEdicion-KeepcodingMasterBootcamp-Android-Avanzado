@@ -16,6 +16,7 @@ public class ActivityRowViewHolder extends RecyclerView.ViewHolder {
 
     private TextView activityNameTextView;
     private ImageView activityLogoImageView;
+    private ImageView activityImgImageView;
     WeakReference<Context> context;
 
     // El constructor se ejecuta tantas veces como celdas quepan en la pantalla más otras dos para tener caché
@@ -27,6 +28,7 @@ public class ActivityRowViewHolder extends RecyclerView.ViewHolder {
 
         activityNameTextView = (TextView) rowActivity.findViewById(R.id.row_activity__activity_name);
         activityLogoImageView = (ImageView) rowActivity.findViewById(R.id.row_activity__activity_logo);
+        activityImgImageView = (ImageView) rowActivity.findViewById(R.id.row_activity__activity_img);
     }
 
     public void setShop(Activity activity) {
@@ -39,6 +41,11 @@ public class ActivityRowViewHolder extends RecyclerView.ViewHolder {
                 load(activity.getLogoUrl()).
                 placeholder(R.drawable.activity_placeholder).
                 into(activityLogoImageView);
+
+        Picasso.with(context.get()).
+                load(activity.getImageUrl()).
+                placeholder(R.drawable.activity_placeholder).
+                into(activityImgImageView);
 
     }
 }
