@@ -22,6 +22,6 @@ A continuación se describen las partes que se han desarrollado (con el check ma
 - [X] Todos los datos se tienen que mostrar en inglés o en español dependiendo de las preferencias de idioma del dispositivo.
 
 ## Enlaces de interes
-Solución al problema de los datos duplicados en CoreDara: [Stackoverflow](http://stackoverflow.com/a/43129221/7837133)
+Solución a cómo comprobar los permisos de localización: [Stackoverflow](https://stackoverflow.com/questions/37986082/android-googlemaps-mylocation-permission)
 
 Solución a cómo comprobar si hay conexión a internet: [Stackoverflow](https://stackoverflow.com/questions/1560788/how-to-check-internet-access-on-android-inetaddress-never-times-out)
